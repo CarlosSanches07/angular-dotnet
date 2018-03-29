@@ -1,0 +1,11 @@
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\bin\Debug\netcoreapp2.0\test-api.deps.json
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\bin\Debug\netcoreapp2.0\test-api.runtimeconfig.json
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\bin\Debug\netcoreapp2.0\test-api.runtimeconfig.dev.json
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\bin\Debug\netcoreapp2.0\test-api.dll
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\bin\Debug\netcoreapp2.0\test-api.pdb
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\obj\Debug\netcoreapp2.0\test-api.csproj.CoreCompileInputs.cache
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\obj\Debug\netcoreapp2.0\test-api.AssemblyInfoInputs.cache
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\obj\Debug\netcoreapp2.0\test-api.AssemblyInfo.cs
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\obj\Debug\netcoreapp2.0\test-api.dll
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\obj\Debug\netcoreapp2.0\test-api.pdb
+C:\Users\carlos.roberto\Documents\angular-dotnet-sqlsoc\api\test-api\obj\Debug\netcoreapp2.0\test-api.csprojResolveAssemblyReference.cache
