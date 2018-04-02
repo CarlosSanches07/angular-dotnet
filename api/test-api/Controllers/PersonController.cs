@@ -14,6 +14,12 @@ namespace test_api.Controllers {
 			return new Person().List();
 		}
 
+		[HttpGet("{id}")]
+
+		public Person Get(int id) {
+			return new Person().Read( id );
+		}
+
 		[HttpPost]
 		public void Post([FromBody]dynamic value) {
 			new Person((string) value.name,(string) value.password, (string) value.email).Create();
@@ -21,13 +27,13 @@ namespace test_api.Controllers {
 
 		[HttpPut("{id}")]
 		public void Put(int id, [FromBody]dynamic value) {
-
+			new Person((string) value.name, (string) value.password, (string) value.email).Update(id);
 		}
 
 		[HttpDelete("{id}")]
 		public void Delete(int id) {
-    
-    }
+			new Person().Delete(id);
+    	}
 
 	}
 }
