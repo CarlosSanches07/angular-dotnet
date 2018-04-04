@@ -24,6 +24,7 @@ namespace Utils {
 				Console.WriteLine("There is no connections");
 			}else{			
 				Connection.Close();
+				Connection.Dispose();
 				Connection = null;
 			}
 		}

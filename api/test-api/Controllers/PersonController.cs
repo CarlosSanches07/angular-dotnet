@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using test_api.Helpers;
 
 namespace test_api.Controllers {
 	[Route("api/[controller]")]
@@ -33,7 +34,6 @@ namespace test_api.Controllers {
 		[HttpDelete("{id}")]
 		public void Delete(int id) {
 			new Person().Delete(id);
-    	}
-
+		}
 	}
 }
