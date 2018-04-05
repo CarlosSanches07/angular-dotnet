@@ -137,6 +137,27 @@ namespace Models {
 			db.Disconnect();
 		}
 
+		public bool Login () {
+			String query = $"select id_user, name from persons.user_data as p where p.email = @Email and hashbytes('MD5', @Password) = p.password";
+			String conn = "Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
+			Db db = new Db(conn);
+			db.Connect();
+			SqlCommand cmd = new SqlCommand(query, db.Connection);
+			cmd.Parameters.Add(new SqlParameter("Email", Email));
+            cmd.Parameters.Add(new SqlParameter("Password", Password));
+            SqlDataReader reader = cmd.ExecuteReader();
+			try{
+				while(reader.Read()){
+					this.Id = reader.GetInt32(0);
+					this.Name = reader.GetString(1);				
+				}
+            }catch(Exception e){
+				Console.WriteLine("Database error");
+			}
+			Console.WriteLine("Name: " + Name + " Id: " + Id + " Email: " + Email + " Senha: " + Password);
+			return (Id != -1);
+		}
+
 	}
 
 }

@@ -12275,9 +12275,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\carlos.roberto\\Documents\\angular-dotnet-sqlsoc\\api\\test-api\\test-api.csproj",
       "projectName": "test-api",

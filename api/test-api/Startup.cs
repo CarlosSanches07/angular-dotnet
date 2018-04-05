@@ -16,6 +16,9 @@ namespace test_api
 {
     public class Startup
     {
+        
+        public const string SECRET = "856FECBA3B06519C8DDDBC80BB080553";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
