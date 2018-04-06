@@ -155,7 +155,7 @@ namespace Models {
 				Console.WriteLine("Database error");
 			}
 			Console.WriteLine("Name: " + Name + " Id: " + Id + " Email: " + Email + " Senha: " + Password);
-			return (Id != -1);
+			return (Name != null);
 		}
 
 	}

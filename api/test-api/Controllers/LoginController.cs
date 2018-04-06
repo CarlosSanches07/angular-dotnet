@@ -26,6 +26,7 @@ namespace test_api.Controllers
             p.Email = data.email;
             p.Password = data.password;
             if(p.Login()){
+                p.Password = null;
                 decimal expireMinutes = data.expireMinutes ?? 60 * 10;
                 var symmetricKey = Convert.FromBase64String(Startup.SECRET);
                 var tokenHandler = new JwtSecurityTokenHandler();
