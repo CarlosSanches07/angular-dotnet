@@ -39,7 +39,8 @@ namespace test_api.Controllers
                     Subject = new ClaimsIdentity(new[]{
                     new Claim("iss", "Teste"),
                     new Claim("aud", "Teste"),
-                    new Claim("user-id", Convert.ToString(p.Id))
+                    new Claim("user-id", Convert.ToString(p.Id)),
+                    new Claim("role-id", Convert.ToString(p.Role))
                 })
                 };
 

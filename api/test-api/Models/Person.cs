@@ -11,9 +11,11 @@ namespace Models {
 		public String Password;
 		public String Email;
 
-		public Person (String name
-									,String password 
-									,String email)
+		public Int32 Role;
+
+		public Person (  String name
+						,String password 
+						,String email )
 		{
 			Name 			= name;
 			Password 	= password;
@@ -23,12 +25,14 @@ namespace Models {
 		public Person (Int32  id
 									,String name
 									,String password
-									,String email)
+									,String email
+									,Int32 role)
 		{
 			Id 			 = id;
 			Name 	 	 = name;
 			Password = password;
 			Email 	 = email;
+			Role = role;
 		}
 
 		public Person (){}
@@ -47,7 +51,8 @@ namespace Models {
 												new Person(reader.GetInt32(0)
 																	,reader.GetString(1)
 																	,reader.GetString(3)
-																	,reader.GetString(2))
+																	,reader.GetString(2)
+																	,reader.GetInt32(4))
 					);
 				}
 			} catch (System.Exception e) {
@@ -93,7 +98,8 @@ namespace Models {
 								reader.GetInt32(0),
 								reader.GetString(1),
 								reader.GetString(2),
-								reader.GetString(3)
+								reader.GetString(3),
+								reader.GetInt32(4)
 							);
 				}
 			}catch(SystemException e) {
@@ -138,7 +144,7 @@ namespace Models {
 		}
 
 		public bool Login () {
-			String query = $"select id_user, name from persons.user_data as p where p.email = @Email and hashbytes('MD5', @Password) = p.password";
+			String query = $"select id_user, name, role from persons.user_data as p where p.email = @Email and hashbytes('MD5', @Password) = p.password";
 			String conn = "Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
 			Db db = new Db(conn);
 			db.Connect();
@@ -149,7 +155,8 @@ namespace Models {
 			try{
 				while(reader.Read()){
 					this.Id = reader.GetInt32(0);
-					this.Name = reader.GetString(1);				
+					this.Name = reader.GetString(1);
+					this.Role = reader.GetInt32(2);		
 				}
             }catch(Exception e){
 				Console.WriteLine("Database error");
