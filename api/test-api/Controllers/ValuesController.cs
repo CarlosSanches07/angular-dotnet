@@ -31,7 +31,7 @@ namespace test_api.Controllers
         public void Post([FromBody]dynamic value)
         {
             Console.WriteLine(value.password);
-            new Person((string) value.name,(string) value.password, (string) value.email).Create();
+            new Person((string) value.name,(string) value.password, (string) value.email, (string) value.phone).Create();
         }
 
         // PUT api/values/5

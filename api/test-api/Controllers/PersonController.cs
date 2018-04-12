@@ -23,12 +23,12 @@ namespace test_api.Controllers {
 
 		[HttpPost]
 		public void Post([FromBody]dynamic value) {
-			new Person((string) value.name,(string) value.password, (string) value.email).Create();
+			new Person((string) value.name,(string) value.password, (string) value.email, (string) value.phone).Create();
 		}
 
 		[HttpPut("{id}")]
 		public void Put(int id, [FromBody]dynamic value) {
-			new Person((string) value.name, (string) value.password, (string) value.email).Update(id);
+			new Person((string) value.name, (string) value.password, (string) value.email,(string) value.phone).Update(id);
 		}
 
 		[HttpDelete("{id}")]

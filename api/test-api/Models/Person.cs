@@ -10,36 +10,51 @@ namespace Models {
 		public String Name;
 		public String Password;
 		public String Email;
+		public String Phone;
 
 		public Int32 Role;
 
 		public Person (  String name
 						,String password 
-						,String email )
+						,String email
+						,String phone )
 		{
 			Name 			= name;
 			Password 	= password;
 			Email 		= email;
+			Phone		= phone;
 		}
 
 		public Person (Int32  id
 									,String name
 									,String password
 									,String email
-									,Int32 role)
+									,Int32 role
+									,String phone)
 		{
 			Id 			 = id;
 			Name 	 	 = name;
 			Password = password;
 			Email 	 = email;
+			Phone 	= phone;
 			Role = role;
 		}
 
+		public Person ( Int32 id,
+						String name,
+						String email,
+						String phone) 
+		{
+			Id = id;
+			Name = name;
+			Email = email;
+			Phone = phone;
+		}
 		public Person (){}
 
 		public List<Person> List () {
 			List<Person> persons = new List<Person>();
-			String query = "select * from persons.user_data";
+			String query = "select id_user, name, email, phone from persons.user_data";
 			String conn = "Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
 			Db db = new Db(conn);
 			db.Connect();
@@ -47,12 +62,11 @@ namespace Models {
 			SqlDataReader reader = cmd.ExecuteReader();
 			try {
 				while(reader.Read()){
-					persons.Add(	
-												new Person(reader.GetInt32(0)
-																	,reader.GetString(1)
-																	,reader.GetString(3)
-																	,reader.GetString(2)
-																	,reader.GetInt32(4))
+					persons.Add(
+						new Person ( reader.GetInt32(0)
+                                	,reader.GetString(1)
+                                	,reader.GetString(2)
+                                	,reader.GetString(3))
 					);
 				}
 			} catch (System.Exception e) {
@@ -65,7 +79,7 @@ namespace Models {
 		}
 
 		public void Create () {
-			String query = "Insert into persons.user_data (name, password, email) values(@Name, hashbytes('MD5', @Password), @Email)";
+			String query = "Insert into persons.user_data (name, password, email, phone) values(@Name, hashbytes('MD5', @Password), @Email, @Phone)";
 			String conn =	"Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
 			Db db = new Db(conn); 	
 			db.Connect();
@@ -73,6 +87,7 @@ namespace Models {
 			cmd.Parameters.Add(new SqlParameter("Name", Name));
 			cmd.Parameters.Add(new SqlParameter("Password", Password));
 			cmd.Parameters.Add(new SqlParameter("Email", Email));
+			cmd.Parameters.Add(new SqlParameter("Phone", Phone));
 			var i = cmd.ExecuteNonQuery();
 			if(i > 0){
 				Console.WriteLine("Data inserted");
@@ -84,7 +99,7 @@ namespace Models {
 
 		public Person Read( Int32 id ) {
 			Person p = null;
-			String query = "select * from persons.user_data where @Id = id_user";
+			String query = "select id_user, name, email, phone from persons.user_data where @Id = id_user";
 			String conn = "Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
 			Db db = new Db(conn);
 			db.Connect();
@@ -98,8 +113,7 @@ namespace Models {
 								reader.GetInt32(0),
 								reader.GetString(1),
 								reader.GetString(2),
-								reader.GetString(3),
-								reader.GetInt32(4)
+								reader.GetString(3)
 							);
 				}
 			}catch(SystemException e) {
@@ -110,7 +124,7 @@ namespace Models {
 		}
 
 		public void Update ( Int32 id ) {
-			String query = $"update persons.user_data set name= @Name, email=@Email where id_user = @id";
+			String query = $"update persons.user_data set name= @Name, email=@Email, phone=@Phone  where id_user = @id";
 			String conn =	"Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
 			Db db = new Db(conn);
 			db.Connect();
@@ -118,6 +132,7 @@ namespace Models {
 			cmd.Parameters.Add(new SqlParameter("Name", Name));
 			cmd.Parameters.Add(new SqlParameter("Email", Email));
 			cmd.Parameters.Add(new SqlParameter("id", id));
+			cmd.Parameters.Add(new SqlParameter("Phone", Phone));
 			var i = cmd.ExecuteNonQuery();
 			if(i > 0){
 				Console.WriteLine("Data updated");
@@ -144,7 +159,7 @@ namespace Models {
 		}
 
 		public bool Login () {
-			String query = $"select id_user, name, role from persons.user_data as p where p.email = @Email and hashbytes('MD5', @Password) = p.password";
+			String query = $"select id_user, name, role, phone from persons.user_data as p where p.email = @Email and hashbytes('MD5', @Password) = p.password";
 			String conn = "Data Source=localhost; Initial Catalog=test; Integrated Security=false; User Id=sa; Password=abc123##";
 			Db db = new Db(conn);
 			db.Connect();
@@ -156,7 +171,8 @@ namespace Models {
 				while(reader.Read()){
 					this.Id = reader.GetInt32(0);
 					this.Name = reader.GetString(1);
-					this.Role = reader.GetInt32(2);		
+					this.Role = reader.GetInt32(2);	
+					this.Phone = reader.GetString(3);	
 				}
             }catch(Exception e){
 				Console.WriteLine("Database error");
